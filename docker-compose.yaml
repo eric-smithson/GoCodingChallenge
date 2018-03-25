@@ -1,0 +1,25 @@
+version: '3'
+services:
+  db:
+    build:
+      context: .
+      dockerfile: devenv/Dockerfile.db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: temporary_password
+
+  api:
+    build:
+      context: .
+      dockerfile: devenv/Dockerfile.api
+    environment:
+      DB_HOST: db
+      DB_USER: postgres
+      DB_PASSWORD: temporary_password
+      DB_NAME: postgres
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/go/src/github.com/rackerlabs/GoCodingChallenge

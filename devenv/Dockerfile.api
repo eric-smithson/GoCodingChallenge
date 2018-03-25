@@ -1,0 +1,10 @@
+FROM golang:1.9
+
+ENV LANG en_US.UTF-8
+
+RUN go get github.com/codegangsta/gin
+
+ENV GOPATH /go
+WORKDIR /go/src/github.com/rackerlabs/GoCodingChallenge
+
+CMD ["gin", "-i", "run", "GoCodingChallenge"]
