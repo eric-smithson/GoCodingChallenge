@@ -21,8 +21,10 @@ func Status(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 func main() {
 	router := httprouter.New()
 	router.GET("/", Status)
+	router.GET("/todos", todo.Read)
 	router.POST("/todos", todo.Create)
-	router.GET("/todos", todo.List)
+	router.PUT("/todos/:id", todo.Update)
+	router.DELETE("/todos/:id", todo.Delete)
 
 	log.Println("Starting server...")
 
